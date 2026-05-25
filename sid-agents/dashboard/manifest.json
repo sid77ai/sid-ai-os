@@ -1,0 +1,12 @@
+{
+  "name": "sid-agents",
+  "label": "Agents",
+  "description": "Agent roster — models, roles, and session activity",
+  "icon": "Users",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/agents",
+    "position": "after:mission"
+  },
+  "entry": "dist/index.js"
+}

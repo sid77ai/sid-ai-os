@@ -1,0 +1,12 @@
+{
+  "name": "sid-bridge",
+  "label": "Bridge",
+  "description": "Telegram-style chat interface for agent communication",
+  "icon": "MessageSquare",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/bridge",
+    "position": "after:warroom"
+  },
+  "entry": "dist/index.js"
+}

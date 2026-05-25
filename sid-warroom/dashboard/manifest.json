@@ -1,0 +1,12 @@
+{
+  "name": "sid-warroom",
+  "label": "War Room",
+  "description": "Cross-LLM council — structured multi-agent debates",
+  "icon": "MessageSquare",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/warroom",
+    "position": "after:agents"
+  },
+  "entry": "dist/index.js"
+}

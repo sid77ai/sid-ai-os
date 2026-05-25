@@ -1,0 +1,12 @@
+{
+  "name": "sid-hivemind",
+  "label": "Hive Mind",
+  "description": "Activity log, session search, and memory overview",
+  "icon": "Database",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/hivemind",
+    "position": "after:bridge"
+  },
+  "entry": "dist/index.js"
+}
