@@ -1,0 +1,9 @@
+name: sid-inbox
+label: Inbox
+description: "SG Inbox — single front-door triage queue"
+icon: inbox
+version: "1.0.0"
+tab:
+  path: /inbox
+  position: after:mission
+entry: dist/index.js

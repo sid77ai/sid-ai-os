@@ -1,0 +1,9 @@
+name: sid-audit
+label: Audit
+description: "Audit — hooks board, cost telemetry, decisions log"
+icon: shield
+version: "1.0.0"
+tab:
+  path: /audit
+  position: after:bridge
+entry: dist/index.js

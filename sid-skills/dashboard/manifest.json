@@ -1,0 +1,12 @@
+{
+  "name": "sid-skills",
+  "label": "Skills",
+  "description": "Skills Academy — competency matrix, agent dossiers, plugin armory. Every skill earned, evaluated, and governed.",
+  "icon": "school",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/skills",
+    "position": "after:agents"
+  },
+  "entry": "dist/index.js"
+}

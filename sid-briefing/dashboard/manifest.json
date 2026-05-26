@@ -1,0 +1,12 @@
+{
+  "name": "sid-briefing",
+  "label": "Briefing",
+  "description": "Morning briefing — /GM build process, highlights, asks with approve/defer, Telegram delivery.",
+  "icon": "calendar",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/briefing",
+    "position": "after:inbox"
+  },
+  "entry": "dist/index.js"
+}

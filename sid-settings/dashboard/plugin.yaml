@@ -1,0 +1,9 @@
+name: sid-settings
+label: Settings
+description: "Settings — integrations, kill switches, agent lifecycle"
+icon: settings
+version: "1.0.0"
+tab:
+  path: /settings
+  position: after:audit
+entry: dist/index.js

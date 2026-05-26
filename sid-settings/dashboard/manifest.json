@@ -1,0 +1,12 @@
+{
+  "name": "sid-settings",
+  "label": "Settings",
+  "description": "Settings — integrations, kill switches, agent lifecycle, cost caps. Everything that gates the OS.",
+  "icon": "settings",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/settings",
+    "position": "after:audit"
+  },
+  "entry": "dist/index.js"
+}

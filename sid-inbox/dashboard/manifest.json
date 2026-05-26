@@ -1,0 +1,12 @@
+{
+  "name": "sid-inbox",
+  "label": "Inbox",
+  "description": "SG Inbox — single front-door triage queue. Every channel (Email, Calendar, Telegram, Manual) funnels into one queue. Classify, route to specialist, approve before send.",
+  "icon": "inbox",
+  "version": "1.0.0",
+  "tab": {
+    "path": "/inbox",
+    "position": "after:mission"
+  },
+  "entry": "dist/index.js"
+}
