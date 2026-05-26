@@ -1,7 +1,7 @@
 {
   "name": "sid-agents",
   "label": "Agents",
-  "description": "Agent roster — models, roles, and session activity",
+  "description": "Specialist agent roster — JARVIS, Birgit, Kenji, Kumar, Q, Claire, Hans — with model, role, status (ACTIVE/PILOT), and last activity",
   "icon": "Users",
   "version": "1.0.0",
   "tab": {

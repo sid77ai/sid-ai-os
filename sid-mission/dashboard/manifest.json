@@ -1,7 +1,7 @@
 {
   "name": "sid-mission",
   "label": "Mission",
-  "description": "Live Mission Control cockpit — telemetry, alerts, and system status",
+  "description": "Mission Control cockpit — live task queue with status strips (QUEUED/RUNNING/BLOCKED/DONE), system telemetry, ATC-style alerts, and cost tracker",
   "icon": "Activity",
   "version": "1.0.0",
   "tab": {

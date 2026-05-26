@@ -1,7 +1,7 @@
 {
   "name": "sid-hivemind",
   "label": "Hive Mind",
-  "description": "Activity log, session search, and memory overview",
+  "description": "Unified activity log across all agents and channels (Telegram, Email, Notion, GitHub) plus pending approval queue with risk levels (low/medium)",
   "icon": "Database",
   "version": "1.0.0",
   "tab": {

@@ -1,7 +1,7 @@
 {
   "name": "sid-bridge",
   "label": "Bridge",
-  "description": "Telegram-style chat interface for agent communication",
+  "description": "Telegram-style chat UI showing agent communication flow — JARVIS routes, Birgit drafts, Hans gates — with bridge status for connected platforms",
   "icon": "MessageSquare",
   "version": "1.0.0",
   "tab": {
