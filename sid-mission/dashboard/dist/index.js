@@ -23,7 +23,7 @@
     ink:"#1B1A18", inkSurface:"#262522",
   };
   var F = {
-    display:"'Bebas Neue', sans-serif",
+    display:"'DM Sans', system-ui, sans-serif",
     body:"'DM Sans', system-ui, sans-serif",
     mono:"'JetBrains Mono', 'Fira Code', monospace",
   };
@@ -33,6 +33,12 @@
   function injectStyles() {
     if (_injected || typeof document === 'undefined') return;
     _injected = true;
+    if (!document.querySelector('link[href*="DM+Sans"]')) {
+      var dmLink = document.createElement('link');
+      dmLink.rel = 'stylesheet';
+      dmLink.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap';
+      document.head.appendChild(dmLink);
+    }
     if (!document.querySelector('link[href*="Material+Symbols+Outlined"]')) {
       var fontLink = document.createElement('link');
       fontLink.rel = 'stylesheet';
@@ -42,6 +48,12 @@
     var s = document.createElement('style');
     s.textContent = '@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.ms{font-family:"Material Symbols Outlined";font-variation-settings:"FILL" 0,"wght" 200,"GRAD" 0}';
     document.head.appendChild(s);
+    var interactiveStyle = document.createElement('style');
+    interactiveStyle.id = 'sid-interactive';
+    if (!document.getElementById('sid-interactive')) {
+      interactiveStyle.textContent = '.sid-btn{cursor:pointer;transition:opacity 0.12s ease;}.sid-btn:hover{opacity:0.75;}.sid-btn:focus-visible{outline:2px solid #E07340;outline-offset:2px;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;}}';
+      document.head.appendChild(interactiveStyle);
+    }
   }
   injectStyles();
 
@@ -86,7 +98,7 @@
   function SectionTitle({ kicker, title, accent, sub }) {
     return React.createElement('div', { style:{marginBottom:14} },
       kicker && React.createElement('div', { style:{fontFamily:F.body, fontSize:11, fontWeight:700, color:T.accentDark, letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:6} }, kicker),
-      React.createElement('div', { style:{fontFamily:F.display, fontSize:24, color:T.text, letterSpacing:'0.04em', lineHeight:1} },
+      React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:20, color:T.text, letterSpacing:'0.01em', lineHeight:1} },
         title, accent && React.createElement('span', { style:{color:T.accent} }, ' '+accent)),
       sub && React.createElement('div', { style:{fontFamily:F.body, fontSize:12, color:T.textDim, marginTop:8, lineHeight:1.5, maxWidth:680} }, sub)
     );
@@ -180,7 +192,7 @@
           props.pulse && React.createElement('span', { style:{width:6, height:6, borderRadius:'50%', background:props.color, animation:'pulse 1.4s infinite'} }),
           props.label
         ),
-        React.createElement('div', { style:{fontFamily:props.mono?F.mono:F.display, fontSize:props.big?18:16, color:props.color, fontWeight:600, lineHeight:1.05, letterSpacing:props.big?'0.06em':'0.04em'} }, props.value),
+        React.createElement('div', { style:{fontFamily:props.mono?F.mono:F.body, fontSize:props.big?18:16, color:props.color, fontWeight:600, lineHeight:1.05, letterSpacing:props.big?'0.06em':'0.04em'} }, props.value),
         props.sub && React.createElement('div', { style:{fontFamily:F.body, fontSize:10, color:'#ffffff77', marginTop:4} }, props.sub),
         typeof props.gauge === 'number' && React.createElement('div', { style:{height:3, background:'#ffffff14', marginTop:7} },
           React.createElement('div', { style:{height:'100%', width:'100%', background:props.color, transform:'scaleX('+(Math.min(props.gauge,100)/100)+')', transformOrigin:'left', transition:'transform 0.5s'} })
@@ -196,7 +208,7 @@
             React.createElement('span', { style:{width:6, height:6, borderRadius:'50%', background:'#fff', animation:'pulse 1.2s infinite'} }),
             'LIVE'
           ),
-          React.createElement('span', { style:{fontFamily:F.display, fontSize:22, letterSpacing:'0.1em'} }, 'MISSION COCKPIT'),
+          React.createElement('span', { style:{fontFamily:F.body, fontWeight:800, fontSize:17, letterSpacing:'0.06em'} }, 'MISSION COCKPIT'),
           React.createElement('span', { style:{fontFamily:F.mono, fontSize:10, color:'#ffffff77', letterSpacing:'0.06em'} }, '\u00b7 REAL-TIME TELEMETRY \u00b7 ATC STRIPS')
         ),
         React.createElement('div', { style:{display:'flex', alignItems:'center', gap:18} },
@@ -248,7 +260,7 @@
       React.createElement('div', { style:{background:T.text, color:'#fff', padding:'8px 14px', display:'flex', alignItems:'center', justifyContent:'space-between'} },
         React.createElement('div', { style:{display:'flex', alignItems:'center', gap:8} },
           React.createElement(Glyph, { name:'radar', size:16, color:T.accent, weight:300 }),
-          React.createElement('span', { style:{fontFamily:F.display, fontSize:13, letterSpacing:'0.1em'} }, 'MISSION MAP'),
+          React.createElement('span', { style:{fontFamily:F.body, fontWeight:600, fontSize:13, letterSpacing:'0.1em'} }, 'MISSION MAP'),
           React.createElement('span', { style:{fontFamily:F.mono, fontSize:9, color:'#ffffff77'} }, '\u00b7 live system topology')
         ),
         React.createElement('div', { style:{display:'flex', alignItems:'center', gap:7} },
@@ -276,7 +288,7 @@
               React.createElement(Glyph, { name:'inbox', size:22, color:T.accent, weight:300 }),
               React.createElement('div', { style:{minWidth:0} },
                 React.createElement('div', { style:{display:'flex', alignItems:'baseline', gap:8, minWidth:0} },
-                  React.createElement('span', { style:{fontFamily:F.display, fontSize:18, color:T.accent, letterSpacing:'0.06em', lineHeight:1} }, 'SG INBOX'),
+                  React.createElement('span', { style:{fontFamily:F.body, fontWeight:800, fontSize:14, color:T.accent, letterSpacing:'0.04em', lineHeight:1} }, 'SG INBOX'),
                   React.createElement('span', { style:{fontFamily:F.mono, fontSize:11, color:T.accentDark, fontWeight:600} }, inbox.length+' TOTAL')
                 ),
                 React.createElement('div', { style:{fontFamily:F.mono, fontSize:10, color:T.accentDark, marginTop:4} }, 'one front door \u00b7 auto-assign on')
@@ -297,7 +309,7 @@
             React.createElement(Glyph, { name:'hub', size:30, color:T.accent, weight:300 }),
             React.createElement('div', null,
               React.createElement('div', { style:{display:'flex', alignItems:'baseline', gap:10} },
-                React.createElement('span', { style:{fontFamily:F.display, fontSize:24, letterSpacing:'0.08em', lineHeight:1} }, 'JARVIS'),
+                React.createElement('span', { style:{fontFamily:F.body, fontWeight:800, fontSize:19, letterSpacing:'0.02em', lineHeight:1} }, 'JARVIS'),
                 React.createElement('span', { style:{fontFamily:F.mono, fontSize:10, color:'#ffffff77'} }, 'Sonnet \u00b7 routing')
               ),
               React.createElement('div', { style:{fontFamily:F.body, fontSize:10, color:'#ffffffaa', marginTop:5, letterSpacing:'0.08em', fontWeight:600} }, 'ORCHESTRATOR \u00b7 ROUTES, NEVER EXECUTES')
@@ -324,7 +336,7 @@
               var isWorking = inbox.find(function(i) { return i.routed === a.id && i.status === 'running'; });
               return React.createElement('div', { key:a.id, title:a.name+' \u00b7 '+a.role, style:{background:isWorking?T.bg:T.surface, border:'1px solid '+T.border, borderTop:'3px solid '+statusColor, boxShadow:isWorking?'0 0 0 2px '+T.accent+'33':'none', padding:'8px 6px 7px', textAlign:'center', display:'flex', flexDirection:'column', gap:4, minWidth:0, transition:'all 0.2s'} },
                 React.createElement('div', { style:{display:'flex', alignItems:'center', justifyContent:'center', gap:4, minWidth:0} },
-                  React.createElement('span', { style:{fontFamily:F.display, fontSize:11, color:T.text, letterSpacing:'0.03em', minWidth:0, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'} }, a.name.toUpperCase()),
+                  React.createElement('span', { style:{fontFamily:F.body, fontWeight:600, fontSize:11, color:T.text, letterSpacing:'0.03em', minWidth:0, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'} }, a.name.toUpperCase()),
                   React.createElement(Dot, { color:isWorking?T.run:statusColor, pulse:isWorking||a.lastActive==='now', size:5 })
                 ),
                 React.createElement('div', { style:{fontFamily:F.mono, fontSize:9, color:isWorking?T.run:T.textDim, fontWeight:isWorking?700:500, letterSpacing:'0.03em', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', minHeight:13} }, isWorking?'RUN':'IDLE')
@@ -369,7 +381,7 @@
         React.createElement('div', { style:{background:T.text, color:'#fff', padding:'7px 11px', display:'flex', alignItems:'center', justifyContent:'space-between'} },
           React.createElement('div', { style:{display:'flex', alignItems:'center', gap:7} },
             React.createElement(Glyph, { name:props.glyph, size:14, color:props.countColor, weight:300 }),
-            React.createElement('span', { style:{fontFamily:F.display, fontSize:12, letterSpacing:'0.1em'} }, props.title)
+            React.createElement('span', { style:{fontFamily:F.body, fontWeight:600, fontSize:12, letterSpacing:'0.1em'} }, props.title)
           ),
           React.createElement('span', { style:{fontFamily:F.mono, fontSize:16, color:props.countColor, fontWeight:700, lineHeight:1} }, String(props.count).padStart(2,'0'))
         ),
@@ -405,11 +417,11 @@
       React.createElement('div', { style:{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(140px, 1fr))', gap:12} },
         React.createElement('div', null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:9, fontWeight:700, color:T.textDim, letterSpacing:'0.12em', marginBottom:4} }, 'DONE TODAY'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:28, color:T.text, lineHeight:1} }, counts.done+'/'+kpis.totalToday)
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:26, color:T.text, lineHeight:1} }, counts.done+'/'+kpis.totalToday)
         ),
         React.createElement('div', null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:9, fontWeight:700, color:T.textDim, letterSpacing:'0.12em', marginBottom:4} }, 'MEETINGS'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:28, color:T.text, lineHeight:1} }, String(kpis.meetingsToday))
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:26, color:T.text, lineHeight:1} }, String(kpis.meetingsToday))
         ),
         React.createElement('div', null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:9, fontWeight:700, color:T.textDim, letterSpacing:'0.12em', marginBottom:4} }, 'BRIEFING'),
@@ -429,7 +441,7 @@
   function LiveTelemetry() {
     return React.createElement(Card, { accent:true },
       React.createElement(SectionTitle, { kicker:'LIVE', title:'Hive Log', sub:'Recent agent activity across all channels' }),
-      React.createElement('div', { style:{display:'flex', flexDirection:'column', gap:2} },
+      React.createElement('div', { style:{display:'flex', flexDirection:'column', gap:2}, 'aria-live':'polite', 'aria-label':'Live activity feed' },
         HIVE_LOG.map(function(entry, i) {
           return React.createElement('div', { key:i, style:{display:'flex', alignItems:'center', gap:10, padding:'6px 10px', background:T.surface, border:'1px solid '+T.border} },
             React.createElement('span', { style:{fontFamily:F.mono, fontSize:10, color:T.textFaint, width:44, flexShrink:0} }, entry.time),

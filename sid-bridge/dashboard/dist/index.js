@@ -3,7 +3,7 @@
   var React = window.__HERMES_PLUGIN_SDK__.React;
 
   var T = { bg:"#FAFAF8", surface:"#F3F3F0", accent:"#E07340", accentLight:"#FFF4ED", accentDark:"#B85A28", accentBorder:"#F0A060", text:"#111110", textMid:"#4A4A48", textDim:"#8A8A87", textFaint:"#C0C0BC", ok:"#16A34A", ink:"#1B1A18", border:"#E2E2DE", borderMid:"#C8C8C3" };
-  var F = { display:"'Bebas Neue', sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', monospace" };
+  var F = { display:"'DM Sans', system-ui, sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', monospace" };
 
   var CHAT = [
     {who:"jarvis",t:"07:01",msg:"☀️ Briefing ready. 3 meetings, 2 P1 items, 1 anomaly."},
@@ -39,7 +39,7 @@
   function BridgeView() {
     var header = React.createElement('div',{style:{marginBottom:14}},
       React.createElement('div',{style:{fontFamily:F.body,fontSize:11,fontWeight:700,color:T.accentDark,letterSpacing:'0.16em',textTransform:'uppercase',marginBottom:6}},'THE BRIDGE'),
-      React.createElement('div',{style:{fontFamily:F.display,fontSize:24,color:T.text,letterSpacing:'0.04em',lineHeight:1}},'JARVIS IN YOUR POCKET.',React.createElement('span',{style:{color:T.accent}},' TELEGRAM IS THE STEERING WHEEL.')),
+      React.createElement('div',{style:{fontFamily:F.body,fontWeight:800,fontSize:20,color:T.text,letterSpacing:'0.01em',lineHeight:1}},'JARVIS IN YOUR POCKET.',React.createElement('span',{style:{color:T.accent}},' TELEGRAM IS THE STEERING WHEEL.')),
       React.createElement('div',{style:{fontFamily:F.body,fontSize:12,color:T.textDim,marginTop:8,lineHeight:1.5}},'The Bridge layer makes the OS portable.')
     );
 
@@ -91,7 +91,7 @@
     var composer = React.createElement('div',{style:{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'#17212B',borderTop:'1px solid #0E1621',color:'#7c93a8',fontFamily:F.body,fontSize:11}},
       React.createElement('span',null,'+'),
       React.createElement('span',{style:{flex:1}},'Message'),
-      React.createElement('span',{color:T.accent},'🎤')
+      React.createElement('span',{style:{color:T.accent}},'🎤')
     );
 
     var phone = React.createElement('div',{style:{width:320,background:T.text,padding:8,borderRadius:36,border:'1px solid #000',boxShadow:'8px 8px 0 '+T.accentBorder}},
@@ -108,8 +108,8 @@
       var s = STEPS[si];
       stepEls.push(
         React.createElement('div',{key:si,style:{display:'grid',gridTemplateColumns:'40px 100px minmax(0,1fr)',gap:14,background:T.bg,border:'1px solid '+T.border,padding:'10px 14px'}},
-          React.createElement('span',{style:{fontFamily:F.display,fontSize:18,color:T.accent}},s.n),
-          React.createElement('span',{style:{fontFamily:F.display,fontSize:13,color:T.text,letterSpacing:'0.05em'}},s.who),
+          React.createElement('span',{style:{fontFamily:F.body,fontWeight:800,fontSize:15,color:T.accent}},s.n),
+          React.createElement('span',{style:{fontFamily:F.body,fontWeight:600,fontSize:13,color:T.text,letterSpacing:'0.05em'}},s.who),
           React.createElement('span',{style:{fontFamily:F.body,fontSize:12,color:T.textMid,lineHeight:1.5}},s.desc)
         )
       );
@@ -122,7 +122,7 @@
         React.createElement('div',{key:bi,style:{background:T.bg,border:'1px solid '+(b.on?T.border:T.borderMid),padding:'10px 12px',opacity:b.on?1:0.55}},
           React.createElement('div',{style:{display:'flex',alignItems:'center',gap:6,marginBottom:4}},
             React.createElement('span',{style:{fontFamily:F.body,fontSize:12,color:b.on?T.accent:T.textDim}},b.g),
-            React.createElement('span',{style:{fontFamily:F.display,fontSize:13,color:T.text,letterSpacing:'0.04em'}},b.n)
+            React.createElement('span',{style:{fontFamily:F.body,fontWeight:600,fontSize:13,color:T.text,letterSpacing:'0.04em'}},b.n)
           ),
           React.createElement('div',{style:{display:'flex',justifyContent:'space-between',alignItems:'center'}},
             React.createElement('span',{style:{fontFamily:F.mono,fontSize:10,color:T.textDim}},b.note),
@@ -150,6 +150,21 @@
       )
     );
   }
+
+  (function() {
+    var el = document.createElement('style');
+    el.id = 'sid-interactive';
+    if (!document.querySelector('link[href*="DM+Sans"]')) {
+      var dmLink = document.createElement('link');
+      dmLink.rel = 'stylesheet';
+      dmLink.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap';
+      document.head.appendChild(dmLink);
+    }
+    if (!document.getElementById('sid-interactive')) {
+      el.textContent = '.sid-btn{cursor:pointer;transition:opacity 0.12s ease;}.sid-btn:hover{opacity:0.75;}.sid-btn:focus-visible{outline:2px solid #E07340;outline-offset:2px;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;}}';
+      document.head.appendChild(el);
+    }
+  })();
 
   window.__HERMES_PLUGINS__.register('sid-bridge', BridgeView);
 })();

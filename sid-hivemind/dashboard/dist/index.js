@@ -18,12 +18,18 @@
     block:"#DC2626", blockLight:"#FEE2E2", pilot:"#7C3AED", pilotLight:"#EDE9FE",
     done:"#71717A", doneLight:"#F4F4F5",
   };
-  var F = { display:"'Bebas Neue', sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', 'Fira Code', monospace" };
+  var F = { display:"'DM Sans', system-ui, sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', 'Fira Code', monospace" };
 
   var _injected = false;
   function injectStyles() {
     if (_injected || typeof document === 'undefined') return;
     _injected = true;
+    if (!document.querySelector('link[href*="DM+Sans"]')) {
+      var dmLink = document.createElement('link');
+      dmLink.rel = 'stylesheet';
+      dmLink.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap';
+      document.head.appendChild(dmLink);
+    }
     if (!document.querySelector('link\[href\*="Material+Symbols+Outlined"\]')) {
       var fontLink = document.createElement('link');
       fontLink.rel = 'stylesheet';
@@ -33,6 +39,12 @@
     var s = document.createElement('style');
     s.textContent = '@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.ms{font-family:"Material Symbols Outlined";font-variation-settings:"FILL" 0,"wght" 200,"GRAD" 0}';
     document.head.appendChild(s);
+    var interactiveStyle = document.createElement('style');
+    interactiveStyle.id = 'sid-interactive';
+    if (!document.getElementById('sid-interactive')) {
+      interactiveStyle.textContent = '.sid-btn{cursor:pointer;transition:opacity 0.12s ease;}.sid-btn:hover{opacity:0.75;}.sid-btn:focus-visible{outline:2px solid #E07340;outline-offset:2px;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;}}';
+      document.head.appendChild(interactiveStyle);
+    }
   }
   injectStyles();
 
@@ -47,7 +59,7 @@
   function SectionTitle({ kicker, title, accent, sub }) {
     return React.createElement('div', { style:{marginBottom:14} },
       kicker && React.createElement('div', { style:{fontFamily:F.body, fontSize:11, fontWeight:700, color:T.accentDark, letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:6} }, kicker),
-      React.createElement('div', { style:{fontFamily:F.display, fontSize:24, color:T.text, letterSpacing:'0.04em', lineHeight:1} }, title, accent && React.createElement('span', { style:{color:T.accent} }, ' '+accent)),
+      React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:20, color:T.text, letterSpacing:'0.01em', lineHeight:1} }, title, accent && React.createElement('span', { style:{color:T.accent} }, ' '+accent)),
       sub && React.createElement('div', { style:{fontFamily:F.body, fontSize:12, color:T.textDim, marginTop:8, lineHeight:1.5, maxWidth:680} }, sub)
     );
   }
@@ -118,22 +130,22 @@
       React.createElement('div', { style:{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:12} },
         React.createElement(Card, null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:10, fontWeight:700, color:T.textDim, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:8} }, 'Sessions'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:36, color:T.text, lineHeight:1} }, String(stats.total)),
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:32, color:T.text, lineHeight:1} }, String(stats.total)),
           React.createElement('div', { style:{fontFamily:F.mono, fontSize:11, color:T.ok, marginTop:4} }, stats.active+' active')
         ),
         React.createElement(Card, null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:10, fontWeight:700, color:T.textDim, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:8} }, 'Messages'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:36, color:T.text, lineHeight:1} }, String(stats.totalMsgs)),
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:32, color:T.text, lineHeight:1} }, String(stats.totalMsgs)),
           React.createElement('div', { style:{fontFamily:F.body, fontSize:11, color:T.textFaint, marginTop:4} }, 'Across all sessions')
         ),
         React.createElement(Card, null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:10, fontWeight:700, color:T.textDim, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:8} }, 'Tokens'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:36, color:T.text, lineHeight:1} }, formatTokens(stats.totalIn+stats.totalOut)),
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:32, color:T.text, lineHeight:1} }, formatTokens(stats.totalIn+stats.totalOut)),
           React.createElement('div', { style:{fontFamily:F.mono, fontSize:10, color:T.textFaint, marginTop:4} }, formatTokens(stats.totalIn)+' in / '+formatTokens(stats.totalOut)+' out')
         ),
         React.createElement(Card, null,
           React.createElement('div', { style:{fontFamily:F.body, fontSize:10, fontWeight:700, color:T.textDim, textTransform:'uppercase', letterSpacing:'0.12em', marginBottom:8} }, 'Models'),
-          React.createElement('div', { style:{fontFamily:F.display, fontSize:36, color:T.text, lineHeight:1} }, String(stats.models.length)),
+          React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:32, color:T.text, lineHeight:1} }, String(stats.models.length)),
           React.createElement('div', { style:{display:'flex', gap:4, marginTop:8, flexWrap:'wrap'} },
             stats.models.slice(0,4).map(function(m) {
               return React.createElement('span', { key:m[0], style:{fontFamily:F.mono, fontSize:10, color:T.textMid, background:T.surface, padding:'2px 6px', border:'1px solid '+T.border} }, m[0].split('/').pop());

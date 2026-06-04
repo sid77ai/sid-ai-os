@@ -16,12 +16,18 @@
     block:"#DC2626", blockLight:"#FEE2E2", pilot:"#7C3AED", pilotLight:"#EDE9FE",
     done:"#71717A", doneLight:"#F4F4F5",
   };
-  var F = { display:"'Bebas Neue', sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', 'Fira Code', monospace" };
+  var F = { display:"'DM Sans', system-ui, sans-serif", body:"'DM Sans', system-ui, sans-serif", mono:"'JetBrains Mono', 'Fira Code', monospace" };
 
   var _injected = false;
   function injectStyles() {
     if (_injected || typeof document === 'undefined') return;
     _injected = true;
+    if (!document.querySelector('link[href*="DM+Sans"]')) {
+      var dmLink = document.createElement('link');
+      dmLink.rel = 'stylesheet';
+      dmLink.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap';
+      document.head.appendChild(dmLink);
+    }
     if (!document.querySelector('link\[href\*="Material+Symbols+Outlined"\]')) {
       var fontLink = document.createElement('link');
       fontLink.rel = 'stylesheet';
@@ -31,6 +37,12 @@
     var s = document.createElement('style');
     s.textContent = '@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}.ms{font-family:"Material Symbols Outlined";font-variation-settings:"FILL" 0,"wght" 200,"GRAD" 0}';
     document.head.appendChild(s);
+    var interactiveStyle = document.createElement('style');
+    interactiveStyle.id = 'sid-interactive';
+    if (!document.getElementById('sid-interactive')) {
+      interactiveStyle.textContent = '.sid-btn{cursor:pointer;transition:opacity 0.12s ease;}.sid-btn:hover{opacity:0.75;}.sid-btn:focus-visible{outline:2px solid #E07340;outline-offset:2px;}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important;animation-iteration-count:1!important;}}';
+      document.head.appendChild(interactiveStyle);
+    }
   }
   injectStyles();
 
@@ -45,7 +57,7 @@
   function SectionTitle({ kicker, title, accent, sub }) {
     return React.createElement('div', { style:{marginBottom:14} },
       kicker && React.createElement('div', { style:{fontFamily:F.body, fontSize:11, fontWeight:700, color:T.accentDark, letterSpacing:'0.16em', textTransform:'uppercase', marginBottom:6} }, kicker),
-      React.createElement('div', { style:{fontFamily:F.display, fontSize:24, color:T.text, letterSpacing:'0.04em', lineHeight:1} }, title, accent && React.createElement('span', { style:{color:T.accent} }, ' '+accent)),
+      React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:20, color:T.text, letterSpacing:'0.01em', lineHeight:1} }, title, accent && React.createElement('span', { style:{color:T.accent} }, ' '+accent)),
       sub && React.createElement('div', { style:{fontFamily:F.body, fontSize:12, color:T.textDim, marginTop:8, lineHeight:1.5, maxWidth:680} }, sub)
     );
   }
@@ -80,33 +92,34 @@
   ];
 
   function WarRoomView() {
-    var _a = useState({ running:false, phaseIdx:0, complete:false, spokenAgents:0 }), state = _a[0], setState = _a[1];
+    var _a = useState({ running:false, phaseIdx:0, complete:false, spokenAgents:0, paused:false }), state = _a[0], setState = _a[1];
     var _b = useState(0), topicIdx = _b[0], setTopicIdx = _b[1];
     var topic = COUNCIL_TOPICS[topicIdx];
 
     var start = useCallback(function() {
-      setState({ running:true, phaseIdx:0, complete:false, spokenAgents:0 });
+      setState({ running:true, phaseIdx:0, complete:false, spokenAgents:0, paused:false });
     }, []);
     var reset = useCallback(function() {
-      setState({ running:false, phaseIdx:0, complete:false, spokenAgents:0 });
+      setState({ running:false, phaseIdx:0, complete:false, spokenAgents:0, paused:false });
     }, []);
     var nextTopic = useCallback(function() {
       setTopicIdx((topicIdx + 1) % COUNCIL_TOPICS.length);
-      setState({ running:false, phaseIdx:0, complete:false, spokenAgents:0 });
+      setState({ running:false, phaseIdx:0, complete:false, spokenAgents:0, paused:false });
     }, [topicIdx]);
 
     useEffect(function() {
       if (!state.running) return;
+      if (state.paused) return;
       if (state.phaseIdx >= PHASES.length - 1 && state.spokenAgents >= topic.views.length) {
-        setState({ running:false, phaseIdx:PHASES.length-1, complete:true, spokenAgents:topic.views.length });
+        setState({ running:false, phaseIdx:PHASES.length-1, complete:true, spokenAgents:topic.views.length, paused:false });
         return;
       }
       var delay = state.spokenAgents < topic.views.length && state.phaseIdx >= 1 ? 1200 : 1800;
       var timer = setTimeout(function() {
         if (state.spokenAgents < topic.views.length && state.phaseIdx >= 1) {
-          setState({ running:true, phaseIdx:state.phaseIdx, complete:false, spokenAgents:state.spokenAgents+1 });
+          setState({ running:true, phaseIdx:state.phaseIdx, complete:false, spokenAgents:state.spokenAgents+1, paused:false });
         } else {
-          setState({ running:true, phaseIdx:Math.min(state.phaseIdx+1, PHASES.length-1), complete:false, spokenAgents:state.spokenAgents });
+          setState({ running:true, phaseIdx:Math.min(state.phaseIdx+1, PHASES.length-1), complete:false, spokenAgents:state.spokenAgents, paused:false });
         }
       }, delay);
       return function() { clearTimeout(timer); };
@@ -131,8 +144,8 @@
             React.createElement('div', { style:{fontFamily:F.mono, fontSize:10, color:T.textDim} }, topic.impulseTime+' \u00b7 '+viewAgents.length+' agents participating')
           ),
           React.createElement('div', { style:{display:'flex', gap:6} },
-            React.createElement('button', { onClick:start, disabled:state.running, style:{fontFamily:F.body, fontSize:12, fontWeight:700, letterSpacing:'0.06em', background:state.running?T.textFaint:T.accent, color:'#fff', border:'none', padding:'10px 20px', cursor:state.running?'default':'pointer'} }, state.running?'IN PROGRESS':'LAUNCH'),
-            React.createElement('button', { onClick:nextTopic, disabled:state.running, style:{fontFamily:F.body, fontSize:11, background:'none', border:'1px solid '+T.border, color:T.textDim, padding:'10px 14px', cursor:state.running?'default':'pointer'} }, 'NEXT TOPIC')
+            React.createElement('button', { onClick:start, className:'sid-btn', disabled:state.running, style:{fontFamily:F.body, fontSize:12, fontWeight:700, letterSpacing:'0.06em', background:state.running?T.textFaint:T.accent, color:'#fff', border:'none', padding:'10px 20px', cursor:state.running?'default':'pointer'} }, state.running?'IN PROGRESS':'LAUNCH'),
+            React.createElement('button', { onClick:nextTopic, className:'sid-btn', disabled:state.running, style:{fontFamily:F.body, fontSize:11, background:'none', border:'1px solid '+T.border, color:T.textDim, padding:'10px 14px', cursor:state.running?'default':'pointer'} }, 'NEXT TOPIC')
           )
         )
       ),
@@ -142,8 +155,66 @@
         // Phase bar
         React.createElement('div', { style:{display:'flex', gap:3, marginBottom:16} },
           PHASES.map(function(p, i) {
-            return React.createElement('div', { key:p.id, title:p.label, style:{flex:1, height:3, background:i<=state.phaseIdx?(i===state.phaseIdx?T.accent:T.accentMid):T.surfaceHigh, transition:'background 0.4s ease'} });
+            return React.createElement('div', { key:p.id, title:p.label, style:{flex:1, height:3, background:i<=state.phaseIdx?(i===state.phaseIdx?T.accent:T.accentLight):T.surfaceHigh, transition:'background 0.4s ease'} });
           })
+        ),
+
+        React.createElement('div', {
+          style: {
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            gap: 8, marginBottom: 12
+          }
+        },
+          React.createElement('button', {
+            onClick: function() {
+              setState(function(prev) {
+                if (prev.phaseIdx === 0 && prev.spokenAgents === 0) return prev;
+                var newSpoken = prev.spokenAgents - 1;
+                if (newSpoken < 0) {
+                  return Object.assign({}, prev, { phaseIdx: Math.max(0, prev.phaseIdx - 1), spokenAgents: 0 });
+                }
+                return Object.assign({}, prev, { spokenAgents: newSpoken });
+              });
+            },
+            disabled: !state.running || (state.phaseIdx === 0 && state.spokenAgents === 0),
+            style: {
+              background: 'none', border: '1px solid ' + T.border, color: T.textMid,
+              fontFamily: F.mono, fontSize: 10, padding: '3px 10px', cursor: 'pointer',
+              letterSpacing: '0.06em', opacity: (!state.running || (state.phaseIdx === 0 && state.spokenAgents === 0)) ? 0.4 : 1
+            }
+          }, '← BACK'),
+          React.createElement('button', {
+            onClick: function() {
+              setState(function(prev) { return Object.assign({}, prev, { paused: !prev.paused }); });
+            },
+            disabled: !state.running || state.complete,
+            style: {
+              background: 'none', border: '1px solid ' + T.border, color: T.textMid,
+              fontFamily: F.mono, fontSize: 10, padding: '3px 10px', cursor: 'pointer',
+              letterSpacing: '0.06em', opacity: (!state.running || state.complete) ? 0.4 : 1
+            }
+          }, state.paused ? 'RESUME' : 'PAUSE'),
+          React.createElement('button', {
+            onClick: function() {
+              setState(function(prev) {
+                var topic = COUNCIL_TOPICS[topicIdx];
+                var viewAgents = Object.keys(topic.views);
+                if (prev.spokenAgents < viewAgents.length) {
+                  return Object.assign({}, prev, { spokenAgents: prev.spokenAgents + 1, paused: false });
+                }
+                if (prev.phaseIdx < PHASES.length - 1) {
+                  return Object.assign({}, prev, { phaseIdx: prev.phaseIdx + 1, spokenAgents: 0, paused: false });
+                }
+                return Object.assign({}, prev, { complete: true });
+              });
+            },
+            disabled: state.complete,
+            style: {
+              background: 'none', border: '1px solid ' + T.border, color: T.textMid,
+              fontFamily: F.mono, fontSize: 10, padding: '3px 10px', cursor: 'pointer',
+              letterSpacing: '0.06em', opacity: state.complete ? 0.4 : 1
+            }
+          }, 'ADVANCE →')
         ),
 
         React.createElement(Card, { accent:true },
@@ -152,7 +223,7 @@
               React.createElement(Glyph, { name:phase.glyph, size:18, color:T.accent })
             ),
             React.createElement('div', null,
-              React.createElement('div', { style:{fontFamily:F.display, fontSize:20, color:T.text, letterSpacing:'0.03em'} }, phase.label),
+              React.createElement('div', { style:{fontFamily:F.body, fontWeight:800, fontSize:16, color:T.text, letterSpacing:'0.01em'} }, phase.label),
               React.createElement('div', { style:{fontFamily:F.body, fontSize:11, color:T.textDim} }, 'Phase '+(state.phaseIdx+1)+' of '+PHASES.length)
             )
           ),
@@ -187,7 +258,7 @@
         ),
 
         // Reset
-        state.complete && React.createElement('button', { onClick:reset, style:{marginTop:12, fontFamily:F.body, fontSize:12, background:'none', border:'1px solid '+T.border, color:T.textDim, padding:'6px 16px', cursor:'pointer'} }, 'RESET')
+        state.complete && React.createElement('button', { onClick:reset, className:'sid-btn', style:{marginTop:12, fontFamily:F.body, fontSize:12, background:'none', border:'1px solid '+T.border, color:T.textDim, padding:'6px 16px', cursor:'pointer'} }, 'RESET')
       ),
 
       // Past decisions

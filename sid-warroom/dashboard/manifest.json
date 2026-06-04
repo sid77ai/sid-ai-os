@@ -2,7 +2,7 @@
   "name": "sid-warroom",
   "label": "War Room",
   "description": "Multi-agent council debates — structured 5-phase protocol (impulse, open floor, cross-views, consolidate, return) with decision logging, cost tracking, and dissent records",
-  "icon": "MessageSquare",
+  "icon": "Gavel",
   "version": "1.0.0",
   "tab": {
     "path": "/warroom",

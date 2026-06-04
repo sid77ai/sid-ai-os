@@ -91,4 +91,4 @@ Plugins use the SID AI-OS warm cream/orange palette:
 
 ## License
 
-MIT
+Proprietary — see [LICENSE](LICENSE).
