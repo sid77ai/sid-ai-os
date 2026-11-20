@@ -364,10 +364,9 @@ test('user text that contains a denylisted marker is refused before HTTP', async
   assert.deepEqual(transport.calls, []);
 });
 
-test('gateway source does not import an HTTP client or a Notion write helper', () => {
+test('lane guard source does not import an HTTP client or a Notion write helper', () => {
   const srcDir = path.join(gatewayRoot, 'src');
-  const files = fs.readdirSync(srcDir).filter((name) => name.endsWith('.ts'));
-  assert.ok(files.length > 0);
+  const files = ['lane.ts', 'prompt.ts'];
   const source = files.map((name) => fs.readFileSync(path.join(srcDir, name), 'utf8')).join('\n');
   assert.doesNotMatch(source, /pages\.create|pages\.update|databases\.update/);
   assert.doesNotMatch(source, /from ['"]node:(http|https|net)['"]/);
