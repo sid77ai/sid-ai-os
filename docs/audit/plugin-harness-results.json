@@ -1,0 +1,425 @@
+{
+  "ranAt": "2026-11-20T14:21:22.237Z",
+  "node": "v22.23.4",
+  "hermesOnPath": false,
+  "pluginCount": 10,
+  "workingIntegrations": [],
+  "failures": [],
+  "plugins": [
+    {
+      "plugin": "sid-agents",
+      "manifestLabel": "Agents",
+      "bytes": 17499,
+      "registeredAs": "sid-agents",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap",
+          "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,0..1&display=block"
+        ],
+        "readsSdkApi": true,
+        "laneMarkers": [
+          "ISC"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [],
+        "laneMarkers": [
+          "ISC"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC"
+        ]
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-audit",
+      "manifestLabel": "Audit",
+      "bytes": 25647,
+      "registeredAs": "sid-audit",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [],
+        "laneMarkers": [],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": []
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-bridge",
+      "manifestLabel": "Bridge",
+      "bytes": 10377,
+      "registeredAs": "sid-bridge",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": []
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [],
+        "laneMarkers": [],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": []
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-briefing",
+      "manifestLabel": "Briefing",
+      "bytes": 26356,
+      "registeredAs": "sid-briefing",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB",
+          "Marco"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [],
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "Marco"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC",
+          "SIOP",
+          "Marco"
+        ]
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-hivemind",
+      "manifestLabel": "Hive Mind",
+      "bytes": 16837,
+      "registeredAs": "sid-hivemind",
+      "static": {
+        "apiCalls": [
+          "getSessions"
+        ],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap",
+          "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,0..1&display=block"
+        ],
+        "readsSdkApi": true,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB",
+          "Sharepoint"
+        ]
+      },
+      "apiRejected": {
+        "calls": [
+          "getSessions"
+        ],
+        "fixtureMarkers": [
+          "Hive Log",
+          "Morning briefing"
+        ],
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB",
+          "Sharepoint"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [
+          "getSessions"
+        ],
+        "showsLiveSentinel": true,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC",
+          "SIOP",
+          "ABB",
+          "Sharepoint"
+        ]
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-inbox",
+      "manifestLabel": "Inbox",
+      "bytes": 23096,
+      "registeredAs": "sid-inbox",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [
+          "Telekom invoice",
+          "SG INBOX"
+        ],
+        "laneMarkers": [
+          "ISC",
+          "SIOP"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC",
+          "SIOP"
+        ]
+      },
+      "interactions": {
+        "route": {
+          "apiCalls": 0,
+          "routedLocally": true
+        }
+      }
+    },
+    {
+      "plugin": "sid-mission",
+      "manifestLabel": "Mission",
+      "bytes": 39896,
+      "registeredAs": "sid-mission",
+      "static": {
+        "apiCalls": [
+          "getStatus",
+          "getSessions"
+        ],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap",
+          "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,0..1&display=block"
+        ],
+        "readsSdkApi": true,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "Sharepoint"
+        ]
+      },
+      "apiRejected": {
+        "calls": [
+          "getStatus",
+          "getSessions"
+        ],
+        "fixtureMarkers": [
+          "Hive Log",
+          "SG INBOX",
+          "Morning briefing"
+        ],
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "Sharepoint"
+        ],
+        "showsLiveSentinel": false,
+        "queueTotal": "8"
+      },
+      "apiResolved": {
+        "calls": [
+          "getStatus",
+          "getSessions"
+        ],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC",
+          "SIOP",
+          "Sharepoint"
+        ],
+        "queueTotal": "9",
+        "rendersSessionTitle": false
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-settings",
+      "manifestLabel": "Settings",
+      "bytes": 25964,
+      "registeredAs": "sid-settings",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [
+          "SG INBOX"
+        ],
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ]
+      },
+      "interactions": {
+        "testPing": {
+          "renderedPong": true,
+          "apiCallsDuringTest": 0,
+          "networkPrimitives": []
+        },
+        "killSwitch": {
+          "showedOff": true,
+          "persistedOutsideReact": false
+        }
+      }
+    },
+    {
+      "plugin": "sid-skills",
+      "manifestLabel": "Skills",
+      "bytes": 52695,
+      "registeredAs": "sid-skills",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [
+          "Hive Log"
+        ],
+        "laneMarkers": [
+          "ISC"
+        ],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": [
+          "ISC"
+        ]
+      },
+      "interactions": {}
+    },
+    {
+      "plugin": "sid-warroom",
+      "manifestLabel": "War Room",
+      "bytes": 21178,
+      "registeredAs": "sid-warroom",
+      "static": {
+        "apiCalls": [],
+        "networkPrimitives": [],
+        "fontUrls": [
+          "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..900;1,9..40,300..900&display=swap",
+          "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,200,0,0..1&display=block"
+        ],
+        "readsSdkApi": false,
+        "laneMarkers": [
+          "ISC",
+          "SIOP",
+          "ABB"
+        ]
+      },
+      "apiRejected": {
+        "calls": [],
+        "fixtureMarkers": [
+          "War Room"
+        ],
+        "laneMarkers": [],
+        "showsLiveSentinel": false
+      },
+      "apiResolved": {
+        "calls": [],
+        "showsLiveSentinel": false,
+        "showsStatusSentinel": false,
+        "stillShowsLaneFixture": []
+      },
+      "interactions": {}
+    }
+  ]
+}
