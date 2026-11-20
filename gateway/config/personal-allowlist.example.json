@@ -1,0 +1,13 @@
+{
+  "lane": "personal-ventures",
+  "placeholder": true,
+  "pageIds": ["pv-page-example-001"],
+  "databaseIds": [],
+  "entries": [
+    {
+      "id": "pv-page-example-001",
+      "parentId": "pv-db-example-001",
+      "lane": "personal-ventures"
+    }
+  ]
+}

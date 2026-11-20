@@ -1,0 +1,8 @@
+{
+  "name": "sid-ai-os-gateway",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-strip-types --test test/lane.test.ts"
+  }
+}
