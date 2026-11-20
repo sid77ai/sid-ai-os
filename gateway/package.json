@@ -3,6 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --experimental-strip-types --test test/lane.test.ts"
+    "start": "node --experimental-strip-types src/main.ts",
+    "test": "node --experimental-strip-types --test test/lane.test.ts test/gateway.test.ts"
+  },
+  "dependencies": {
+    "@ag-ui/core": "^1.0.5",
+    "@ag-ui/encoder": "^1.0.5"
   }
 }

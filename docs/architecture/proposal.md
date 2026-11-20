@@ -90,9 +90,11 @@ Acceptance: a denylisted fixture string never appears in the built prompt; an un
 
 ### Phase 2 — Model gateway
 
-Files: `gateway/src/server.ts` (bind `127.0.0.1`), `gateway/src/providers/openai.ts`, `anthropic.ts`, `xai.ts`, `lmstudio.ts`, `gateway/test/providers.test.ts`, `.env.example` with empty keys (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `XAI_API_KEY`, `LMSTUDIO_BASE_URL`).
+Files: `gateway/src/server.ts` (bind `127.0.0.1`), `gateway/src/providers/openai.ts`, `anthropic.ts`, `xai.ts`, `lmstudio.ts`, `gateway/test/gateway.test.ts`, `.env.example` with empty keys (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `XAI_API_KEY`, `LMSTUDIO_BASE_URL`).
 
-LM Studio, GPT, and Grok go through an OpenAI-compatible chat-completions request. Anthropic is translated in `anthropic.ts` only. Keys come from the environment.
+Sid chose AG-UI 1.0 as the gateway-to-UI wire for this phase. The server encodes runs with `@ag-ui/encoder`. Client `tools`, page ids, and `forwardedProps` other than the provider name are ignored. The gateway is the only issuer of interrupts. No consequential tool is registered. LM Studio's base URL and model id stay empty until configured, and the URL must be `127.0.0.1`.
+
+LM Studio, GPT, and Grok go through an OpenAI-compatible chat-completions request with `store: false`. Anthropic is translated in `anthropic.ts` only. The Messages API has no request-level retention flag. Keys come from the environment.
 
 Tests: a local stub server records the outbound URL and body. The body must be the Phase 1 prompt. A missing key returns an error object, not demo copy.
 
