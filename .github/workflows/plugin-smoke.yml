@@ -1,0 +1,17 @@
+name: SID plugin smoke check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check plugin manifests and JavaScript bundles
+        run: node scripts/check-plugins.mjs
